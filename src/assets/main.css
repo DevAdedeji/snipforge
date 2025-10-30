@@ -1,23 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-@import "tailwindcss";
-@import "@nuxt/ui";
+@import 'tailwindcss';
+@import '@nuxt/ui';
 
 @theme {
-  --color-primary: #3B82F6;
+  --color-primary: #3b82f6;
   --color-background-light: #f6f7f8;
-  --color-background-dark: #0F172A;
-  --color-text-primary-dark: #E2E8F0;
-  --color-text-secondary-dark: #94A3B8;
-  --color-card-dark: #1E293B;
+  --color-background-dark: #0f172a;
+  --color-text-primary-dark: #e2e8f0;
+  --color-text-secondary-dark: #94a3b8;
+  --color-card-dark: #1e293b;
 }
 
 :root {
-  --color-primary: #3B82F6;
+  --color-primary: #3b82f6;
   --color-background-light: #f6f7f8;
-  --color-background-dark: #0F172A;
-  --color-text-primary-dark: #E2E8F0;
-  --color-text-secondary-dark: #94A3B8;
-  --color-card-dark: #1E293B;
+  --color-background-dark: #0f172a;
+  --color-text-primary-dark: #e2e8f0;
+  --color-text-secondary-dark: #94a3b8;
+  --color-card-dark: #1e293b;
 }
 
 body {
@@ -25,7 +25,7 @@ body {
 }
 
 * {
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 button {
