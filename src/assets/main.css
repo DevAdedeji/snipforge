@@ -1,35 +1,33 @@
-@import './base.css';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+@import "@nuxt/ui";
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
+@theme {
+  --color-primary: #3B82F6;
+  --color-background-light: #f6f7f8;
+  --color-background-dark: #0F172A;
+  --color-text-primary-dark: #E2E8F0;
+  --color-text-secondary-dark: #94A3B8;
+  --color-card-dark: #1E293B;
 }
 
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
+:root {
+  --color-primary: #3B82F6;
+  --color-background-light: #f6f7f8;
+  --color-background-dark: #0F172A;
+  --color-text-primary-dark: #E2E8F0;
+  --color-text-secondary-dark: #94A3B8;
+  --color-card-dark: #1E293B;
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
+body {
+  background-color: var(--color-background-dark);
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
+* {
+  font-family: "Montserrat", sans-serif;
+}
 
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
+button {
+  cursor: pointer;
 }
