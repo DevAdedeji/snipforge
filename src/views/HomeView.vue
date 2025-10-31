@@ -1,5 +1,5 @@
 <template>
-  <main class="w-full min-h-screen">
+  <main class="w-full max-w-[1500px] mx-auto min-h-screen">
     <header class="px-4 py-2">
       <nav class="flex items-center justify-between">
         <div class="flex items-center gap-2">
@@ -7,11 +7,10 @@
           <p class="text-xl font-bold leading-tight tracking-[-0.015em]">SnipForge</p>
         </div>
         <router-link
-          to="/login"
+          to="#"
           class="bg-primary text-text-primary-dark rounded-lg h-10 px-4 flex items-center justify-center font-medium"
         >
-          <UIcon name="i-heroicons-plus" class="block sm:hidden text-2xl" />
-          <span class="hidden sm:block">Create Snippets</span>
+          <span>Dashboard</span>
         </router-link>
       </nav>
     </header>
@@ -27,9 +26,17 @@
         The ultimate vault for developers. Explore a world of elegant solutions and contribute your
         own.
       </p>
-      <UButton color="primary" class="mt-4 text-text-primary-dark font-medium text-base"
-        >Explore Snippets</UButton
-      >
+      <div class="flex items-center gap-2">
+        <UButton color="primary" class="mt-4 text-text-primary-dark font-medium text-base"
+          >Explore Snippets</UButton
+        >
+        <UButton
+          color="primary"
+          to="/create"
+          class="mt-4 text-text-primary-dark font-medium text-base"
+          >Get Started</UButton
+        >
+      </div>
     </div>
   </main>
 </template>

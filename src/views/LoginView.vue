@@ -1,5 +1,7 @@
 <template>
-  <main class="w-full h-screen flex items-center justify-center text-text-primary-dark">
+  <main
+    class="w-full max-w-[1500px] mx-auto h-screen flex items-center justify-center text-text-primary-dark"
+  >
     <div
       class="bg-card-dark/50! p-4 sm:p-8 shadow-subtle backdrop-blur-sm border border-white/10 flex w-full max-w-[90%] mx-auto sm:max-w-md flex-col items-center justify-center gap-4 rounded-lg"
     >
@@ -7,7 +9,7 @@
         <img src="/logo.svg" alt="" />
       </div>
       <h1
-        class="text-text-primary-dark tracking-tight text-3xl font-bold leading-tight text-center pb-2"
+        class="text-text-primary-dark tracking-tight text-2xl md:text-3xl font-bold leading-tight text-center pb-2"
       >
         Sign in to SnipForge
       </h1>
@@ -18,7 +20,7 @@
         <UButton
           color="neutral"
           variant="outline"
-          class="bg-[#2d3748]! text-text-primary-dark"
+          class="bg-[#2d3748]! h-12 text-text-primary-dark"
           @click="loginWithGoogle"
         >
           <img src="/google.svg" class="size-5" alt="google logo" />
@@ -27,7 +29,7 @@
         <UButton
           color="neutral"
           variant="outline"
-          class="bg-[#2d3748]! text-text-primary-dark"
+          class="bg-[#2d3748]! h-12 text-text-primary-dark"
           @click="loginWithGithub"
         >
           <img src="/github.svg" class="size-5" alt="github logo" />

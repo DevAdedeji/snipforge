@@ -15,7 +15,7 @@ export default defineConfig({
         ui: {
           button: {
             slots: {
-              base: ['h-12 flex items-center justify-center']
+              base: ['h-9 px-4 flex items-center justify-center']
             }
           }
         }
