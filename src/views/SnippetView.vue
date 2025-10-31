@@ -1,7 +1,9 @@
 <template>
   <main class="w-full max-w-[1500px] mx-auto min-h-screen flex flex-col gap-6 pb-10">
     <div v-if="fetching" class="w-full h-screen flex items-center justify-center text-center">
-      <p class="text-xl md:text-2xl font-medium text-text-primary-dark">Fetching Snippet Details...</p>
+      <p class="text-xl md:text-2xl font-medium text-text-primary-dark">
+        Fetching Snippet Details...
+      </p>
     </div>
     <div v-else class="w-full flex flex-col gap-6">
       <header>
