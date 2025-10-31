@@ -6,12 +6,6 @@
           <img src="/logo.svg" alt="" />
           <p class="text-xl font-bold leading-tight tracking-[-0.015em]">SnipForge</p>
         </div>
-        <router-link
-          to="#"
-          class="bg-primary text-text-primary-dark rounded-lg h-10 px-4 flex items-center justify-center font-medium"
-        >
-          <span>Dashboard</span>
-        </router-link>
       </nav>
     </header>
     <div
@@ -42,5 +36,4 @@
 </template>
 
 <script setup lang="ts">
-import { RouterLink } from 'vue-router'
 </script>
