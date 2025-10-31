@@ -1,18 +1,20 @@
 <template>
   <main class="w-full max-w-[1500px] mx-auto min-h-screen flex flex-col gap-6 pb-10">
     <div v-if="fetching" class="w-full h-screen flex items-center justify-center text-center">
-      <p class="text-2xl font-medium text-text-primary-dark">Fetching Snippet Details...</p>
+      <p class="text-xl md:text-2xl font-medium text-text-primary-dark">Fetching Snippet Details...</p>
     </div>
     <div v-else class="w-full flex flex-col gap-6">
       <header>
-        <nav class="px-4 md:px-8 py-3 flex items-center gap-2 justify-between border-b border-card-dark">
-          <buton
+        <nav
+          class="px-4 md:px-8 py-3 flex items-center gap-2 justify-between border-b border-card-dark"
+        >
+          <button
             class="flex items-center gap-2 font-medium text-text-secondary-dark hover:text-text-primary-dark transition-colors text-xl"
             @click="router.back()"
           >
             <UIcon name="i-heroicons-arrow-left" />
             <span class="hidden md:block">Back</span>
-          </buton>
+          </button>
           <UInput placeholder="Untitled Snippet" v-model="snippetDetails.title" />
           <div class="flex items-center gap-2">
             <UButton
@@ -49,13 +51,13 @@
               </UButton>
               <UButton
                 color="primary"
-                class="text-text-primary-dark font-medium text-sm min-w-[84px] max-w-[480px]"
+                class="text-text-primary-dark font-medium text-sm md:min-w-[84px] md:max-w-[480px]"
                 @click="runCode"
                 :loading="isRunning"
                 :disabled="isRunning"
               >
                 <UIcon v-if="!isRunning" name="i-heroicons-play" />
-                <p>{{ isRunning ? 'Running...' : 'Run Code' }}</p>
+                <p class="hidden sm:block">{{ isRunning ? 'Running...' : 'Run Code' }}</p>
               </UButton>
             </div>
             <div class="flex-1 min-h-0">

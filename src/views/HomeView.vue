@@ -28,11 +28,14 @@
       </p>
       <div class="flex items-center gap-2">
         <UButton color="primary" class="mt-4 text-text-primary-dark font-medium text-base"
-        >Explore Snippets</UButton
-      >
-      <UButton color="primary" to="/create" class="mt-4 text-text-primary-dark font-medium text-base"
-        >Get Started</UButton
-      >
+          >Explore Snippets</UButton
+        >
+        <UButton
+          color="primary"
+          to="/create"
+          class="mt-4 text-text-primary-dark font-medium text-base"
+          >Get Started</UButton
+        >
       </div>
     </div>
   </main>

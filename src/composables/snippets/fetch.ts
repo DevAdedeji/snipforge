@@ -19,7 +19,6 @@ export const useFetchSnippet = (snippetId: string) => {
       } else {
         toast.add({ title: 'Error!', description: 'Snippet not found', color: 'error' })
       }
-
     } catch (error) {
       console.error('Error fetching snippet:', error)
       toast.add({ title: 'Error!', description: 'Error fetching snippet', color: 'error' })

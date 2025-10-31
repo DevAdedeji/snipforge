@@ -45,15 +45,15 @@
               {{ language }}
             </UButton>
             <UButton
-              color="primary"
-              class="text-text-primary-dark font-medium text-sm min-w-[84px] max-w-[480px]"
-              @click="runCode"
-              :loading="isRunning"
-              :disabled="isRunning"
-            >
-              <UIcon v-if="!isRunning" name="i-heroicons-play" />
-              <p>{{ isRunning ? 'Running...' : 'Run Code' }}</p>
-            </UButton>
+                color="primary"
+                class="text-text-primary-dark font-medium text-sm md:min-w-[84px] md:max-w-[480px]"
+                @click="runCode"
+                :loading="isRunning"
+                :disabled="isRunning"
+              >
+                <UIcon v-if="!isRunning" name="i-heroicons-play" />
+                <p class="hidden sm:block">{{ isRunning ? 'Running...' : 'Run Code' }}</p>
+              </UButton>
           </div>
           <div class="flex-1 min-h-0">
             <CodeEditor v-model="code" v-model:language="language" />

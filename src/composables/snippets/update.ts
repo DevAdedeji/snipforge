@@ -16,7 +16,7 @@ export const useUpdateSnippet = () => {
 
       const snippetRef = doc(db, 'snippets', snippetId)
       await updateDoc(snippetRef, {
-        ...snippetData
+        ...snippetData,
       })
       toast.add({ title: 'Success!', description: 'Snippet updated' })
     } catch (e: unknown) {
