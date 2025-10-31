@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import LoginView from '@/views/LoginView.vue'
+import CreateView from '@/views/CreateView.vue'
+import SnippetView from '@/views/SnippetView.vue'
 import { auth } from '@/firebase'
 import { onAuthStateChanged } from 'firebase/auth'
 
@@ -16,11 +18,28 @@ const router = createRouter({
       },
     },
     {
+      path: '/create',
+      name: 'create',
+      component: CreateView,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
       path: '/login',
       name: 'login',
       component: LoginView,
       meta: {
         guestOnly: true,
+      },
+    },
+    {
+      path: '/snippet/:id',
+      name: 'SnippetView',
+      component: SnippetView,
+      props: true,
+      meta: {
+        requiresAuth: true,
       },
     },
   ],
