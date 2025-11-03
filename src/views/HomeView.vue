@@ -1,15 +1,8 @@
 <template>
   <main class="w-full max-w-[1500px] mx-auto min-h-screen">
-    <header class="px-4 py-2">
-      <nav class="flex items-center justify-between">
-        <div class="flex items-center gap-2">
-          <img src="/logo.svg" alt="" />
-          <p class="text-xl font-bold leading-tight tracking-[-0.015em]">SnipForge</p>
-        </div>
-      </nav>
-    </header>
+    <Header />
     <div
-      class="max-w-[90%] mx-auto flex flex-col gap-4 items-center justify-center h-[80vh] text-center"
+      class="max-w-[90%] mx-auto flex flex-col gap-4 items-center justify-center h-[60vh] text-center"
     >
       <h1
         class="text-text-primary-dark text-4xl font-black leading-tight tracking-[-0.033em] sm:text-5xl md:text-6xl"
@@ -21,7 +14,10 @@
         own.
       </p>
       <div class="flex items-center gap-2">
-        <UButton color="primary" class="mt-4 text-text-primary-dark font-medium text-base"
+        <UButton
+          color="primary"
+          to="/snippets"
+          class="mt-4 text-text-primary-dark font-medium text-base"
           >Explore Snippets</UButton
         >
         <UButton
@@ -32,7 +28,28 @@
         >
       </div>
     </div>
+    <div class="max-w-[90%] mx-auto py-8 px-4">
+      <div v-if="loading" class="text-center text-gray-400">
+        <p>Loading your snippets...</p>
+      </div>
+      <div v-else class="flex flex-col gap-4">
+        <h3 class="self-start pb-2 border-b border-[#334155]">Public Snippets</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <SnippetCard
+            v-for="snippet in snippets"
+            :key="snippet.id"
+            :snippet="snippet"
+            @deleted="snippets"
+            :public="true"
+          />
+        </div>
+      </div>
+    </div>
   </main>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import Header from '@/components/layout/AppHeader.vue'
+import { useFetchPublicSnippets } from '@/composables/snippets/fetch'
+const { snippets, loading } = useFetchPublicSnippets()
+</script>

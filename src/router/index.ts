@@ -3,6 +3,7 @@ import HomeView from '@/views/HomeView.vue'
 import LoginView from '@/views/LoginView.vue'
 import CreateView from '@/views/CreateView.vue'
 import SnippetView from '@/views/SnippetView.vue'
+import SnippetsView from '@/views/SnippetsView.vue'
 import { auth } from '@/firebase'
 import { onAuthStateChanged } from 'firebase/auth'
 
@@ -34,8 +35,16 @@ const router = createRouter({
       },
     },
     {
+      path: '/snippets',
+      name: 'snippets',
+      component: SnippetsView,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
       path: '/snippet/:id',
-      name: 'SnippetView',
+      name: 'snippet',
       component: SnippetView,
       props: true,
       meta: {

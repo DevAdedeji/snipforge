@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, defineModel } from 'vue'
-import { CodeEditor } from 'monaco-editor-vue3'
+import { CodeEditor, type SupportedLanguage } from 'monaco-editor-vue3'
 import * as monacoEditor from 'monaco-editor'
 import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker'
 import jsonWorker from 'monaco-editor/esm/vs/language/json/json.worker?worker'
@@ -40,7 +40,7 @@ self.MonacoEnvironment = {
 const code = defineModel({ required: true, type: String })
 const language = defineModel('language', {
   required: true,
-  type: String as () => 'javascript' | 'typescript' | 'python',
+  type: String as () => SupportedLanguage,
 })
 
 const editorTheme = ref('myCustomTheme')
