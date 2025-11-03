@@ -9,6 +9,7 @@
   --color-text-primary-dark: #e2e8f0;
   --color-text-secondary-dark: #94a3b8;
   --color-card-dark: #1e293b;
+  --color-surface-dark: #1e293b;
 }
 
 :root {
@@ -19,6 +20,7 @@
   --color-text-secondary-dark: #94a3b8;
   --color-card-dark: #1e293b;
   --color-border-dark: #334155;
+  --color-surface-dark: #1e293b;
 }
 
 body {

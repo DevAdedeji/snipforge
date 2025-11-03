@@ -21,13 +21,13 @@ export function useAuth() {
   const loginWithGoogle = async () => {
     const provider = new GoogleAuthProvider()
     await signInWithPopup(auth, provider)
-    router.push('/')
+    router.push('/snippets')
   }
 
   const loginWithGithub = async () => {
     const provider = new GithubAuthProvider()
     await signInWithPopup(auth, provider)
-    router.push('/')
+    router.push('/snippets')
   }
 
   const logout = async () => {

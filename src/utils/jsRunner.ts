@@ -3,7 +3,6 @@ import ts from 'typescript'
 
 export function runJavaScriptCode(code: string): { output: string; error: string | null } {
   try {
-    // Capture console.log output
     const logs: string[] = []
     const originalLog = console.log
     const originalError = console.error

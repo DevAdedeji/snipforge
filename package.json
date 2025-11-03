@@ -21,6 +21,7 @@
   "dependencies": {
     "@nuxt/ui": "^4.1.0",
     "firebase": "^12.4.0",
+    "highlight.js": "^11.11.1",
     "monaco-editor": "^0.54.0",
     "monaco-editor-vue3": "^1.0.4",
     "pinia": "^3.0.3",

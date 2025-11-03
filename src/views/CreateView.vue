@@ -64,7 +64,7 @@
         <div
           class="w-full bg-card-dark border border-[#334155] overflow-hidden rounded-xl h-[50vh] max-h-[50vh]"
         >
-          <div class="h-full overflow-y-auto relative px-4 flex flex-col gap-2">
+          <div class="h-full overflow-y-auto relative px-4 flex flex-col">
             <div
               class="sticky border-b border-[#334155] py-4 top-0 left-0 right-0 flex items-center justify-between bg-card-dark"
             >
@@ -73,16 +73,17 @@
                 <UIcon name="i-heroicons-trash" />
               </button>
             </div>
-            <div>
+            <div class="py-4">
               <div v-if="output.error" class="text-red-400 font-mono text-sm whitespace-pre-wrap">
                 {{ output.error }}
               </div>
               <div
                 v-else-if="output.content"
-                class="text-green-400 font-mono text-sm whitespace-pre-wrap"
+                class="font-mono text-sm whitespace-pre-wrap text-gray-300"
               >
                 {{ output.content }}
               </div>
+              <div v-else class="text-gray-500 italic">Click 'Run Code' to see the output.</div>
             </div>
           </div>
         </div>
@@ -139,8 +140,9 @@ import CodeEditor from '@/components/CodeEditor.vue'
 import { shouldDetectLanguage, detectLanguage } from '@/utils/languageDetector'
 import { runPythonCode } from '@/utils/pythonRunner'
 import { runJavaScriptCode, runTypeScriptCode } from '@/utils/jsRunner'
+import { runCodeWithPiston, shouldUsePiston } from '@/utils/pistonRunner'
 import { useSaveSnippet } from '@/composables/snippets/save'
-import type { Snippet } from '@/types/snippets'
+import type { Snippet, SupportedLanguage } from '@/types/snippets'
 
 const router = useRouter()
 
@@ -164,7 +166,7 @@ const handleSaveSnippet = () => {
   saveSnippet(payload)
 }
 
-const language = ref<'javascript' | 'typescript' | 'python'>('python')
+const language = ref<SupportedLanguage>('python')
 const code = ref(`
 def greet(name):
     print(f"Hello, {name}!")
@@ -188,30 +190,24 @@ async function runCode() {
   output.value = { content: '', error: null }
 
   try {
-    if (language.value === 'python') {
-      const result = await runPythonCode(code.value)
-      output.value = { content: result.output, error: result.error }
-    } else if (language.value === 'javascript') {
-      const result = runJavaScriptCode(code.value)
-      output.value = { content: result.output, error: result.error }
+    let result
+
+    if (shouldUsePiston(language.value)) {
+      result = await runCodeWithPiston(code.value, language.value)
+    } else if (language.value === 'python') {
+      result = await runPythonCode(code.value)
     } else if (language.value === 'typescript') {
-      const result = runTypeScriptCode(code.value)
-      output.value = { content: result.output, error: result.error }
-    }
-  } catch (error: unknown) {
-    let errMsg: string | null = null
-    if (error instanceof Error) {
-      errMsg = error.message
-    } else if (typeof error === 'string') {
-      errMsg = error
+      result = runTypeScriptCode(code.value)
+    } else if (language.value === 'javascript') {
+      result = runJavaScriptCode(code.value)
     } else {
-      try {
-        errMsg = JSON.stringify(error)
-      } catch {
-        errMsg = String(error)
-      }
+      result = { output: '', error: 'Unsupported language' }
     }
-    output.value = { content: '', error: errMsg }
+
+    output.value = { content: result.output, error: result.error }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    output.value = { content: '', error: error.message }
   } finally {
     isRunning.value = false
   }
