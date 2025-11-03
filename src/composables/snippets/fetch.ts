@@ -4,7 +4,7 @@ import { db } from '@/firebase'
 import { useToast } from '@nuxt/ui/runtime/composables/useToast.js'
 import type { Snippet } from '@/types/snippets'
 import { useAuth } from '@/composables/auth'
-import { useRouter } from "vue-router"
+import { useRouter } from 'vue-router'
 
 export const useFetchPublicSnippets = () => {
   const toast = useToast()
@@ -46,10 +46,14 @@ export const useFetchUserSnippets = () => {
       snippets.value = []
       return
     }
-    if(load) loading.value = true
+    if (load) loading.value = true
     try {
       const snippetsColRef = collection(db, 'snippets')
-      const q = query(snippetsColRef, where('userId', '==', currentUserId), orderBy('favourite', 'desc'))
+      const q = query(
+        snippetsColRef,
+        where('userId', '==', currentUserId),
+        orderBy('favourite', 'desc'),
+      )
       const querySnapshot = await getDocs(q)
       snippets.value = querySnapshot.docs.map((doc) => ({
         id: doc.id,
@@ -93,9 +97,12 @@ export const useFetchSnippet = (snippetId: string) => {
 
       if (docSnap.exists()) {
         const snippetData = { id: docSnap.id, ...(docSnap.data() as Snippet) }
-        if ( snippetData.private === false || (snippetData.private === true && snippetData.userId === currentUserId) ) {
+        if (
+          snippetData.private === false ||
+          (snippetData.private === true && snippetData.userId === currentUserId)
+        ) {
           snippet.value = snippetData
-        } else if ( snippetData.private === true && snippetData.userId !== currentUserId ) {
+        } else if (snippetData.private === true && snippetData.userId !== currentUserId) {
           snippet.value = null
           toast.add({ title: 'Error!', description: 'Unauthorized access', color: 'error' })
           useRouter().push('/')

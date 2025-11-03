@@ -116,7 +116,12 @@
           </div>
           <div class="w-full flex flex-col gap-2">
             <label for="description">Description:</label>
-            <UTextarea class="w-full" name="description" v-model="snippetDetails.description" :disabled="!user" />
+            <UTextarea
+              class="w-full"
+              name="description"
+              v-model="snippetDetails.description"
+              :disabled="!user"
+            />
           </div>
           <div class="flex items-center justify-between">
             <label for="private">Private:</label>
