@@ -24,11 +24,13 @@
           <p class="text-sm">Explanation</p>
           <div class="relative sm:h-[55vh] sm:max-h-[55vh] overflow-y-auto p-2">
             <div v-if="running" class="flex items-center justify-center text-center h-full">
-                <p class="text-base text-text-secondary-dark">Running...</p>
+              <p class="text-base text-text-secondary-dark">Running...</p>
             </div>
-            <div v-else class="markdown-viewer prose prose-invert prose-sm max-w-none text-sm text-text-secondary-dark"
-                v-html="renderMarkdown(explanation)">
-            </div>
+            <div
+              v-else
+              class="markdown-viewer prose prose-invert prose-sm max-w-none text-sm text-text-secondary-dark"
+              v-html="renderMarkdown(explanation)"
+            ></div>
           </div>
         </div>
       </div>
@@ -42,7 +44,7 @@
         >
           <UIcon name="i-heroicons-arrow-path" />
           Regenerate
-      </UButton>
+        </UButton>
       </div>
     </template>
   </UModal>
@@ -50,11 +52,11 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { explainCode } from "@/services/gemini";
+import { explainCode } from '@/services/gemini'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/github-dark.css'
-import { useToast } from "@nuxt/ui/runtime/composables/useToast.js";
-import { renderMarkdown } from "@/utils/markdown";
+import { useToast } from '@nuxt/ui/runtime/composables/useToast.js'
+import { renderMarkdown } from '@/utils/markdown'
 const props = defineProps<{
   code: string
   language: string
@@ -76,18 +78,21 @@ const highlightedCode = computed(() => {
   return hljs.highlightAuto(codePreview.value).value
 })
 
-const running = ref(false);
-const explanation = ref("");
+const running = ref(false)
+const explanation = ref('')
 const runExplainCode = async () => {
-    try {
-        running.value = true
-        const response = await explainCode(props.code, props.language)
-        explanation.value = response
+  try {
+    running.value = true
+    const response = await explainCode(props.code, props.language)
+    explanation.value = response
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any){
-        useToast().add({title: "Error", description: error.message || error || "Something went wrong, pls try again"})
-    } finally {
-        running.value = false
-    }
+  } catch (error: any) {
+    useToast().add({
+      title: 'Error',
+      description: error.message || error || 'Something went wrong, pls try again',
+    })
+  } finally {
+    running.value = false
+  }
 }
 </script>

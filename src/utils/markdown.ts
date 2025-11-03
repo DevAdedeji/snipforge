@@ -15,14 +15,12 @@ const md: MarkdownIt = new MarkdownIt({
           hljs.highlight(str, { language: lang, ignoreIllegals: true }).value +
           '</code></pre>'
         )
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (__) {
         /* ignore errors */
       }
     }
-    return (
-      '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + '</code></pre>'
-    )
+    return '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + '</code></pre>'
   },
 })
 

@@ -5,7 +5,7 @@ let genAI: GoogleGenAI | null = null
 
 export function initGemini() {
   if (!genAI) {
-    genAI = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY})
+    genAI = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY })
   }
 
   return genAI

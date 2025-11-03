@@ -87,17 +87,14 @@
             </div>
           </div>
         </div>
-        <div class="flex flex-col gap-2">
+        <div v-if="code && code.trim().length > 0" class="flex flex-col gap-2">
           <h3>AI Actions</h3>
           <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
-            <UButton
-              color="neutral"
-              variant="outline"
-              class="bg-card-dark! text-text-primary-dark font-medium text-sm min-w-[84px] max-w-[480px]"
-            >
-              <UIcon name="i-heroicons-sparkles" class="text-primary" />
-              Explain
-            </UButton>
+            <ExplainCodeModal
+              :code="code"
+              :language="language"
+              :title="snippetDetails.title || ''"
+            />
             <UButton
               color="neutral"
               variant="outline"
@@ -137,6 +134,7 @@
 import { ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import CodeEditor from '@/components/CodeEditor.vue'
+import ExplainCodeModal from '@/components/ExplainCodeModal.vue'
 import { shouldDetectLanguage, detectLanguage } from '@/utils/languageDetector'
 import { runPythonCode } from '@/utils/pythonRunner'
 import { runJavaScriptCode, runTypeScriptCode } from '@/utils/jsRunner'
