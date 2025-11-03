@@ -102,22 +102,14 @@
                 :language="language"
                 :title="snippetDetails.title || ''"
               />
-              <UButton
-                color="neutral"
-                variant="outline"
-                class="bg-card-dark! text-text-primary-dark font-medium text-sm min-w-[84px] max-w-[480px]"
-              >
-                <UIcon name="i-heroicons-rocket-launch" class="text-green-500" />
-                Improve
-              </UButton>
-              <UButton
-                color="neutral"
-                variant="outline"
-                class="bg-card-dark! text-text-primary-dark font-medium text-sm min-w-[84px] max-w-[480px]"
-              >
-                <UIcon name="i-heroicons-beaker" class="text-primary" />
-                Tests
-              </UButton>
+              <ImproveCodeModal
+                :code="code"
+                :language="language"
+                :title="snippetDetails.title || ''"
+              />
+              <GenerateTestModal :code="code"
+                :language="language"
+                :title="snippetDetails.title || ''" />
             </div>
           </div>
           <div class="w-full flex flex-col gap-2">
@@ -149,7 +141,9 @@ import { useFetchSnippet } from '@/composables/snippets/fetch'
 import { useUpdateSnippet } from '@/composables/snippets/update'
 import type { Snippet, SupportedLanguage } from '@/types/snippets'
 import CodeEditor from '@/components/CodeEditor.vue'
-import ExplainCodeModal from '@/components/ExplainCodeModal.vue'
+import ExplainCodeModal from '@/components/ExplainSnippetModal.vue'
+import ImproveCodeModal from '@/components/ImproveSnippetModal.vue'
+import GenerateTestModal from "@/components/GenerateTestModal.vue"
 
 const route = useRoute()
 const router = useRouter()

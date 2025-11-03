@@ -1,14 +1,13 @@
 <template>
-  <UModal title="Code Explanation" :ui="{ content: 'w-[1000px]! max-w-full!' }">
+  <UModal v-model:open="open" title="Snippet Tests" aria-describedby="explain-snippet" :ui="{ content: 'w-[1000px]! max-w-full!' }">
     <UButton
-      color="neutral"
-      variant="outline"
-      class="bg-card-dark! text-text-primary-dark font-medium text-sm min-w-[84px] max-w-[480px]"
-      @click="runExplainCode"
-    >
-      <UIcon name="i-heroicons-sparkles" class="text-primary" />
-      Explain
-    </UButton>
+                color="neutral"
+                variant="outline"
+                class="bg-card-dark! text-text-primary-dark font-medium text-sm min-w-[84px] max-w-[480px]"
+              >
+                <UIcon name="i-heroicons-beaker" class="text-primary" />
+                Tests
+              </UButton>
 
     <template #body>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -21,10 +20,18 @@
           </div>
         </div>
         <div class="flex flex-col gap-1 h-full w-full overflow-hidden">
-          <p class="text-sm">Explanation</p>
-          <div class="relative sm:h-[55vh] sm:max-h-[55vh] overflow-y-auto p-2">
-            <div v-if="running" class="flex items-center justify-center text-center h-full">
-              <p class="text-base text-text-secondary-dark">Running...</p>
+          <p class="text-sm">Tests</p>
+          <div class="relative sm:h-[55vh] sm:max-h-[55vh] overflow-y-auto">
+            <div v-if="running" class="flex flex-col gap-2">
+              <USkeleton class="h-8 w-full" />
+              <USkeleton class="h-8 w-full" />
+              <USkeleton class="h-8 w-[80%]" />
+              <USkeleton class="h-8 w-full" />
+              <USkeleton class="h-8 w-[60%]" />
+              <USkeleton class="h-8 w-full" />
+              <USkeleton class="h-8 w-full" />
+              <USkeleton class="h-8 w-[60%]" />
+              <USkeleton class="h-8 w-full" />
             </div>
             <div
               v-else
@@ -36,11 +43,11 @@
       </div>
     </template>
     <template #footer>
-      <div class="w-full flex items-center justify-end">
+      <div class="w-full flex items-center gap-2 justify-end">
         <UButton
           role="button"
           class="bg-card-dark! h-9 text-text-primary-dark font-medium text-sm min-w-[84px] max-w-[480px]"
-          @click.stop="runExplainCode"
+          @click.stop="runGenerateTests"
         >
           <UIcon name="i-heroicons-arrow-path" />
           Regenerate
@@ -51,12 +58,15 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import { explainCode } from '@/services/gemini'
+import { computed, ref, watch } from 'vue'
+import { generateTests } from '@/services/gemini'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/github-dark.css'
 import { useToast } from '@nuxt/ui/runtime/composables/useToast.js'
 import { renderMarkdown } from '@/utils/markdown'
+
+const open = ref(false)
+
 const props = defineProps<{
   code: string
   language: string
@@ -80,10 +90,10 @@ const highlightedCode = computed(() => {
 
 const running = ref(false)
 const explanation = ref('')
-const runExplainCode = async () => {
+const runGenerateTests = async () => {
   try {
     running.value = true
-    const response = await explainCode(props.code, props.language)
+    const response = await generateTests(props.code, props.language)
     explanation.value = response
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
@@ -95,4 +105,8 @@ const runExplainCode = async () => {
     running.value = false
   }
 }
+
+watch(open, ()=> {
+    runGenerateTests()
+})
 </script>
