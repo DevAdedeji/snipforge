@@ -4,7 +4,7 @@ import { db } from '@/firebase'
 import { useToast } from '@nuxt/ui/runtime/composables/useToast.js'
 import type { Snippet } from '@/types/snippets'
 
-type UpdatableSnippetData = Omit<Snippet, 'userId'>
+type UpdatableSnippetData = Omit<Snippet, 'userId' | 'id'>
 
 export const useUpdateSnippet = () => {
   const loading = ref(false)
@@ -15,9 +15,7 @@ export const useUpdateSnippet = () => {
       loading.value = true
 
       const snippetRef = doc(db, 'snippets', snippetId)
-      await updateDoc(snippetRef, {
-        ...snippetData,
-      })
+      await updateDoc(snippetRef, snippetData)
       toast.add({ title: 'Success!', description: 'Snippet updated' })
     } catch (e: unknown) {
       console.error('Error updating snippet:', e)

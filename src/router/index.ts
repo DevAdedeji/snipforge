@@ -48,7 +48,7 @@ const router = createRouter({
       component: SnippetView,
       props: true,
       meta: {
-        requiresAuth: true,
+        requiresAuth: false,
       },
     },
   ],

@@ -27,19 +27,16 @@
         >
       </div>
       <div class="flex items-center gap-2 text-text-secondary-dark">
-        <button v-if="!public" class="p-1 rounded hover:bg-white/10">
-          <UIcon name="i-lucide-star" />
+        <button v-if="!public" class="p-1 rounded hover:bg-white/10" @click.stop="updateSnippetFavourite">
+          <UIcon :name="updating ? 'i-heroicons-arrow-path' : snippet.favourite ? 'i-heroicons-star-solid' : 'i-heroicons-star'" :class="updating ? 'animate-spin' : ''" />
         </button>
-        <button class="p-1 rounded hover:bg-white/10">
+        <button class="p-1 rounded hover:bg-white/10" @click.stop="shareSnippet" >
           <UIcon name="i-heroicons-share" />
-        </button>
-        <button class="p-1 rounded hover:bg-white/10">
-          <UIcon name="i-lucide-copy" />
         </button>
         <button
           v-if="!public"
           class="p-1 rounded hover:bg-red-400 text-red-600"
-          @click="handleDelete"
+          @click.stop="handleDelete"
         >
           <UIcon
             :name="deleteLoading ? 'i-heroicons-arrow-path' : 'i-heroicons-trash'"
@@ -55,14 +52,18 @@
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useDeleteSnippet } from '@/composables/snippets/delete'
+import { useUpdateSnippet } from "@/composables/snippets/update"
 import type { Snippet } from '@/types/snippets'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/github-dark.css'
+import { useClipboard } from '@/composables/utils/clipboard'
 
+const { copy } = useClipboard()
 const { loading: deleteLoading, deleteSnippet } = useDeleteSnippet()
+const { loading: updating, updateSnippet } = useUpdateSnippet()
 const router = useRouter()
 
-const emit = defineEmits(['deleted'])
+const emit = defineEmits(['deleted', 'updated'])
 const props = defineProps<{
   snippet: Snippet
   public: boolean
@@ -92,5 +93,21 @@ const handleDelete = async () => {
     await deleteSnippet(props.snippet.id)
     emit('deleted')
   }
+}
+
+const updateSnippetFavourite = async () => {
+  if(props.snippet && props.snippet.id) {
+    const data = {
+    ...props.snippet,
+    favourite: !props.snippet.favourite
+  }
+  updateSnippet(props.snippet.id, data)
+  emit('updated')
+  }
+}
+
+const shareSnippet = () => {
+  const url = import.meta.env.VITE_APP_URL + `/snippet/${props.snippet.id}`
+  copy(url)
 }
 </script>

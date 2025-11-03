@@ -1,5 +1,10 @@
 <template>
-  <UModal v-model:open="open" title="Improve Snippet" aria-describedby="improve-snippet" :ui="{ content: 'w-[1000px]! max-w-full!' }">
+  <UModal
+    v-model:open="open"
+    title="Improve Snippet"
+    aria-describedby="improve-snippet"
+    :ui="{ content: 'w-[1000px]! max-w-full!' }"
+  >
     <UButton
       color="neutral"
       variant="outline"
@@ -43,8 +48,12 @@
     </template>
     <template #footer>
       <div class="w-full flex items-center gap-2 justify-end">
-        <UButton v-if="explanation.length" class="text-sm text-text-primary-dark" @click="copy(explanation)">
-            Copy Improved Snippet
+        <UButton
+          v-if="explanation.length"
+          class="text-sm text-text-primary-dark"
+          @click="copy(explanation)"
+        >
+          Copy Improved Snippet
         </UButton>
         <UButton
           role="button"
@@ -66,7 +75,7 @@ import hljs from 'highlight.js'
 import 'highlight.js/styles/github-dark.css'
 import { useToast } from '@nuxt/ui/runtime/composables/useToast.js'
 import { renderMarkdown } from '@/utils/markdown'
-import { useClipboard } from "@/composables/utils/clipboard"
+import { useClipboard } from '@/composables/utils/clipboard'
 
 const { copy } = useClipboard()
 const open = ref(false)
@@ -110,7 +119,7 @@ const runImproveCode = async () => {
   }
 }
 
-watch(open, ()=> {
-    runImproveCode()
+watch(open, () => {
+  runImproveCode()
 })
 </script>

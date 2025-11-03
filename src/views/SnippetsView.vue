@@ -45,6 +45,7 @@
           :snippet="snippet"
           @deleted="refreshSnippets"
           :public="false"
+          @updated="refreshSnippets"
         />
       </div>
     </div>
@@ -78,6 +79,6 @@ const filteredSnippets = computed(() => {
 })
 
 const refreshSnippets = () => {
-  fetchUserSnippets()
+  fetchUserSnippets(false)
 }
 </script>

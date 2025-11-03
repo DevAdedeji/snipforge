@@ -1,13 +1,18 @@
 <template>
-  <UModal v-model:open="open" title="Snippet Tests" aria-describedby="explain-snippet" :ui="{ content: 'w-[1000px]! max-w-full!' }">
+  <UModal
+    v-model:open="open"
+    title="Snippet Tests"
+    aria-describedby="explain-snippet"
+    :ui="{ content: 'w-[1000px]! max-w-full!' }"
+  >
     <UButton
-                color="neutral"
-                variant="outline"
-                class="bg-card-dark! text-text-primary-dark font-medium text-sm min-w-[84px] max-w-[480px]"
-              >
-                <UIcon name="i-heroicons-beaker" class="text-primary" />
-                Tests
-              </UButton>
+      color="neutral"
+      variant="outline"
+      class="bg-card-dark! text-text-primary-dark font-medium text-sm min-w-[84px] max-w-[480px]"
+    >
+      <UIcon name="i-heroicons-beaker" class="text-primary" />
+      Tests
+    </UButton>
 
     <template #body>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -106,7 +111,7 @@ const runGenerateTests = async () => {
   }
 }
 
-watch(open, ()=> {
-    runGenerateTests()
+watch(open, () => {
+  runGenerateTests()
 })
 </script>

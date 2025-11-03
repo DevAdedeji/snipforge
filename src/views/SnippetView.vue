@@ -17,8 +17,8 @@
             <UIcon name="i-heroicons-arrow-left" />
             <span class="hidden md:block">Back</span>
           </button>
-          <UInput placeholder="Untitled Snippet" v-model="snippetDetails.title" />
-          <div class="flex items-center gap-2">
+          <UInput placeholder="Untitled Snippet" v-model="snippetDetails.title" :disabled="!user" />
+          <div v-if="user" class="flex items-center gap-2">
             <UButton
               color="primary"
               class="text-text-primary-dark font-medium text-sm md:min-w-[84px] md:max-w-[480px]"
@@ -107,22 +107,24 @@
                 :language="language"
                 :title="snippetDetails.title || ''"
               />
-              <GenerateTestModal :code="code"
+              <GenerateTestModal
+                :code="code"
                 :language="language"
-                :title="snippetDetails.title || ''" />
+                :title="snippetDetails.title || ''"
+              />
             </div>
           </div>
           <div class="w-full flex flex-col gap-2">
             <label for="description">Description:</label>
-            <UTextarea class="w-full" name="description" v-model="snippetDetails.description" />
+            <UTextarea class="w-full" name="description" v-model="snippetDetails.description" :disabled="!user" />
           </div>
           <div class="flex items-center justify-between">
             <label for="private">Private:</label>
-            <USwitch name="private" v-model="snippetDetails.private" />
+            <USwitch name="private" v-model="snippetDetails.private" :disabled="!user" />
           </div>
           <div class="w-full flex flex-col gap-2">
             <label for="tags">Tags:</label>
-            <UInputTags name="tags" v-model="snippetDetails.tags" />
+            <UInputTags name="tags" v-model="snippetDetails.tags" :disabled="!user" />
           </div>
         </div>
       </div>
@@ -143,11 +145,13 @@ import type { Snippet, SupportedLanguage } from '@/types/snippets'
 import CodeEditor from '@/components/CodeEditor.vue'
 import ExplainCodeModal from '@/components/ExplainSnippetModal.vue'
 import ImproveCodeModal from '@/components/ImproveSnippetModal.vue'
-import GenerateTestModal from "@/components/GenerateTestModal.vue"
+import GenerateTestModal from '@/components/GenerateTestModal.vue'
+import { useAuth } from '@/composables/auth'
 
 const route = useRoute()
 const router = useRouter()
 const snippetId = route.params.id as string
+const { user } = useAuth()
 
 const snippetDetails = ref<Partial<Snippet>>({
   title: 'Untitle Snippet',

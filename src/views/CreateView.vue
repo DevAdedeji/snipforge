@@ -96,13 +96,15 @@
               :title="snippetDetails.title || ''"
             />
             <ImproveCodeModal
-                :code="code"
-                :language="language"
-                :title="snippetDetails.title || ''"
-              />
-            <GenerateTestModal :code="code"
-                :language="language"
-                :title="snippetDetails.title || ''" />
+              :code="code"
+              :language="language"
+              :title="snippetDetails.title || ''"
+            />
+            <GenerateTestModal
+              :code="code"
+              :language="language"
+              :title="snippetDetails.title || ''"
+            />
           </div>
         </div>
         <div class="w-full flex flex-col gap-2">
@@ -127,8 +129,8 @@ import { ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import CodeEditor from '@/components/CodeEditor.vue'
 import ExplainCodeModal from '@/components/ExplainSnippetModal.vue'
-import ImproveCodeModal from "@/components/ImproveSnippetModal.vue"
-import GenerateTestModal from "@/components/GenerateTestModal.vue"
+import ImproveCodeModal from '@/components/ImproveSnippetModal.vue'
+import GenerateTestModal from '@/components/GenerateTestModal.vue'
 import { shouldDetectLanguage, detectLanguage } from '@/utils/languageDetector'
 import { runPythonCode } from '@/utils/pythonRunner'
 import { runJavaScriptCode, runTypeScriptCode } from '@/utils/jsRunner'

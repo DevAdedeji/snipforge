@@ -1,5 +1,9 @@
 <template>
-  <UModal title="Snippet Explanation" aria-describedby="explain-snippet" :ui="{ content: 'w-[1000px]! max-w-full!' }">
+  <UModal
+    title="Snippet Explanation"
+    aria-describedby="explain-snippet"
+    :ui="{ content: 'w-[1000px]! max-w-full!' }"
+  >
     <UButton
       color="neutral"
       variant="outline"
