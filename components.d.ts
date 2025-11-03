@@ -13,6 +13,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     AppHeader: typeof import('./src/components/layout/AppHeader.vue')['default']
     CodeEditor: typeof import('./src/components/CodeEditor.vue')['default']
+    ExplainCodeModal: typeof import('./src/components/ExplainCodeModal.vue')['default']
     Header: typeof import('./src/components/layout/Header.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
@@ -22,6 +23,7 @@ declare module 'vue' {
     UIcon: typeof import('./node_modules/@nuxt/ui/dist/runtime/vue/components/Icon.vue')['default']
     UInput: typeof import('./node_modules/@nuxt/ui/dist/runtime/components/Input.vue')['default']
     UInputTags: typeof import('./node_modules/@nuxt/ui/dist/runtime/components/InputTags.vue')['default']
+    UModal: typeof import('./node_modules/@nuxt/ui/dist/runtime/components/Modal.vue')['default']
     USwitch: typeof import('./node_modules/@nuxt/ui/dist/runtime/components/Switch.vue')['default']
     UTextarea: typeof import('./node_modules/@nuxt/ui/dist/runtime/components/Textarea.vue')['default']
   }

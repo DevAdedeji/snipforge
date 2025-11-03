@@ -34,3 +34,25 @@ body {
 button {
   cursor: pointer;
 }
+
+.markdown-viewer p {
+  margin-bottom: 1em;
+}
+.markdown-viewer h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+.markdown-viewer ul,
+.markdown-viewer ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1em;
+  list-style-type: disc;
+}
+.markdown-viewer li {
+  margin-bottom: 0.5em;
+}
+.markdown-viewer strong {
+  font-weight: 600;
+}

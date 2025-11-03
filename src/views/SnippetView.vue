@@ -97,14 +97,11 @@
           <div class="flex flex-col gap-2">
             <h3>AI Actions</h3>
             <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
-              <UButton
-                color="neutral"
-                variant="outline"
-                class="bg-card-dark! text-text-primary-dark font-medium text-sm min-w-[84px] max-w-[480px]"
-              >
-                <UIcon name="i-heroicons-sparkles" class="text-primary" />
-                Explain
-              </UButton>
+              <ExplainCodeModal
+                :code="code"
+                :language="language"
+                :title="snippetDetails.title || ''"
+              />
               <UButton
                 color="neutral"
                 variant="outline"
@@ -144,7 +141,6 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import CodeEditor from '@/components/CodeEditor.vue'
 import { shouldDetectLanguage, detectLanguage } from '@/utils/languageDetector'
 import { runPythonCode } from '@/utils/pythonRunner'
 import { runJavaScriptCode, runTypeScriptCode } from '@/utils/jsRunner'
@@ -152,6 +148,8 @@ import { runCodeWithPiston, shouldUsePiston } from '@/utils/pistonRunner'
 import { useFetchSnippet } from '@/composables/snippets/fetch'
 import { useUpdateSnippet } from '@/composables/snippets/update'
 import type { Snippet, SupportedLanguage } from '@/types/snippets'
+import CodeEditor from '@/components/CodeEditor.vue'
+import ExplainCodeModal from '@/components/ExplainCodeModal.vue'
 
 const route = useRoute()
 const router = useRouter()
