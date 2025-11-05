@@ -17,7 +17,11 @@
             <UIcon name="i-heroicons-arrow-left" />
             <span class="hidden md:block">Back</span>
           </button>
-          <UInput placeholder="Untitled Snippet" v-model="snippetDetails.title" :disabled="!canEdit" />
+          <UInput
+            placeholder="Untitled Snippet"
+            v-model="snippetDetails.title"
+            :disabled="!canEdit"
+          />
           <div v-if="canEdit" class="flex items-center gap-2">
             <UButton
               color="primary"
@@ -158,7 +162,6 @@ const router = useRouter()
 const snippetId = route.params.id as string
 const { user } = useAuth()
 
-
 const snippetDetails = ref<Partial<Snippet>>({
   title: 'Untitle Snippet',
   description: '',
@@ -242,7 +245,7 @@ watch(code, (newCode, oldCode) => {
 
 const { loading: fetching, snippet } = useFetchSnippet(snippetId)
 
-const canEdit = computed( () => user && (snippet.value?.userId === user.value?.uid))
+const canEdit = computed(() => user && snippet.value?.userId === user.value?.uid)
 
 watch(
   snippet,
