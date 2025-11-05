@@ -17,8 +17,8 @@
             <UIcon name="i-heroicons-arrow-left" />
             <span class="hidden md:block">Back</span>
           </button>
-          <UInput placeholder="Untitled Snippet" v-model="snippetDetails.title" :disabled="!user" />
-          <div v-if="user" class="flex items-center gap-2">
+          <UInput placeholder="Untitled Snippet" v-model="snippetDetails.title" :disabled="!canEdit" />
+          <div v-if="canEdit" class="flex items-center gap-2">
             <UButton
               color="primary"
               class="text-text-primary-dark font-medium text-sm md:min-w-[84px] md:max-w-[480px]"
@@ -120,16 +120,16 @@
               class="w-full"
               name="description"
               v-model="snippetDetails.description"
-              :disabled="!user"
+              :disabled="!canEdit"
             />
           </div>
           <div class="flex items-center justify-between">
             <label for="private">Private:</label>
-            <USwitch name="private" v-model="snippetDetails.private" :disabled="!user" />
+            <USwitch name="private" v-model="snippetDetails.private" :disabled="!canEdit" />
           </div>
           <div class="w-full flex flex-col gap-2">
             <label for="tags">Tags:</label>
-            <UInputTags name="tags" v-model="snippetDetails.tags" :disabled="!user" />
+            <UInputTags name="tags" v-model="snippetDetails.tags" :disabled="!canEdit" />
           </div>
         </div>
       </div>
@@ -138,7 +138,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { shouldDetectLanguage, detectLanguage } from '@/utils/languageDetector'
 import { runPythonCode } from '@/utils/pythonRunner'
@@ -157,6 +157,7 @@ const route = useRoute()
 const router = useRouter()
 const snippetId = route.params.id as string
 const { user } = useAuth()
+
 
 const snippetDetails = ref<Partial<Snippet>>({
   title: 'Untitle Snippet',
@@ -240,6 +241,8 @@ watch(code, (newCode, oldCode) => {
 })
 
 const { loading: fetching, snippet } = useFetchSnippet(snippetId)
+
+const canEdit = computed( () => user && (snippet.value?.userId === user.value?.uid))
 
 watch(
   snippet,
