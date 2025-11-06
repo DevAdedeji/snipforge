@@ -30,8 +30,13 @@
       />
     </div>
     <div class="max-w-[90%] mx-auto py-8 px-4">
-      <div v-if="loading" class="text-center text-gray-400">
-        <p>Loading your snippets...</p>
+      <div v-if="loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <USkeleton class="h-[180px] rounded-lg" />
+        <USkeleton class="h-[180px] rounded-lg" />
+        <USkeleton class="h-[180px] rounded-lg" />
+        <USkeleton class="h-[180px] rounded-lg" />
+        <USkeleton class="h-[180px] rounded-lg" />
+        <USkeleton class="h-[180px] rounded-lg" />
       </div>
       <div v-else-if="!filteredSnippets.length" class="text-center text-gray-400">
         <p v-if="searchTerm">No snippets found matching "{{ searchTerm }}".</p>

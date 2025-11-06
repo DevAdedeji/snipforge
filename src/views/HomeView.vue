@@ -29,12 +29,17 @@
       </div>
     </div>
     <div class="max-w-[90%] mx-auto py-8 px-4">
-      <div v-if="loading" class="text-center text-gray-400">
-        <p>Loading your snippets...</p>
-      </div>
-      <div v-else class="flex flex-col gap-4">
+      <div class="flex flex-col gap-4">
         <h3 class="self-start pb-2 border-b border-[#334155]">Public Snippets</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div v-if="loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <USkeleton class="h-[180px] rounded-lg" />
+          <USkeleton class="h-[180px] rounded-lg" />
+          <USkeleton class="h-[180px] rounded-lg" />
+          <USkeleton class="h-[180px] rounded-lg" />
+          <USkeleton class="h-[180px] rounded-lg" />
+          <USkeleton class="h-[180px] rounded-lg" />
+        </div>
+        <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <SnippetCard
             v-for="snippet in snippets"
             :key="snippet.id"
