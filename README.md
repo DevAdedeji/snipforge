@@ -18,12 +18,9 @@ This project offers several key benefits: enhanced code reusability, improved co
 - [Deployment](#deployment)
 
 ## Features
-
+*   Authentication with firebase.
 *   Create and manage code snippets.
 *   Explain snippet, Improve snippet and generate test for snippet with Google Gemini
-*   Organize snippets with tags.
-*   Search snippets by content or tags.
-*   Export snippets in various formats.
 
 ## Tech Stack
 
